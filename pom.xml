@@ -7,6 +7,10 @@
     <version>0.1.1-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
+    <description>
+        This is a Java client library for the Cloudflare Turnstile Siteverify API.
+        It provides a simple and efficient way to verify Turnstile tokens in your Java applications.
+    </description>
     <url>https://github.com/osslabz/turnstile-siteverify-client</url>
 
     <properties>
