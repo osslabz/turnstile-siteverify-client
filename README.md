@@ -6,7 +6,7 @@ Turnstyle Siteverity Client
 
 # Cloudflare Turnstile Client
 
-This is a Java client library for the Cloudflare Turnstile siteverify API. It provides a simple and efficient way to verify Turnstile tokens in your Java applications.
+This is a Java client library for the Cloudflare Turnstile Siteverify API. It provides a simple and efficient way to verify Turnstile tokens in your Java applications.
 
 ## Features
 

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.osslabz</groupId>
     <artifactId>turnstile-siteverify-client</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.4.1-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
+    <description>
+        This is a Java client library for the Cloudflare Turnstile Siteverify API.
+        It provides a simple and efficient way to verify Turnstile tokens in your Java applications.
+    </description>
     <url>https://github.com/osslabz/turnstile-siteverify-client</url>
 
     <properties>
@@ -17,11 +20,11 @@
         <project.build.sourceEncoding>${osslabz.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${osslabz.encoding}</project.reporting.outputEncoding>
 
-        <project.build.outputTimestamp>2025-04-22T09:23:23Z</project.build.outputTimestamp>
+        <project.build.outputTimestamp>2025-04-23T12:21:37Z</project.build.outputTimestamp>
 
         <maven.compiler.release>${osslabz.java.version}</maven.compiler.release>
 
-        <jackson.version>2.18.2</jackson.version>
+        <jackson.version>2.18.3</jackson.version>
         <okhttp.version>4.12.0</okhttp.version>
         <lombok.version>1.18.38</lombok.version>
     </properties>
@@ -43,8 +46,8 @@
     </developers>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com/osslabz/turnstile-siteverify-client.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/osslabz/turnstile-siteverify-client.git</developerConnection>
+        <connection>scm:git:https://github.com/osslabz/turnstile-siteverify-client.git</connection>
+        <developerConnection>scm:git:https://github.com/osslabz/turnstile-siteverify-client.git</developerConnection>
         <url>https://github.com/osslabz/turnstile-siteverify-client</url>
         <tag>main</tag>
     </scm>
