@@ -1,4 +1,4 @@
-package net.osslabz.turnstile;
+package net.osslabz.turnstile.siteverify;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class TurnstileResponse {
+public class TurnstileSiteverifyResponse {
 
     private String action;
 
