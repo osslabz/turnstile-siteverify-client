@@ -66,24 +66,6 @@ ObjectMapper customObjectMapper = new ObjectMapper();
 TurnstileClient client = new TurnstileClient(secretKey, customHttpClient, customObjectMapper);
 ```
 
-## Building
-
-To build the project, run:
-
-```
-mvn clean install
-```
-
-## Testing
-
-To run the tests, use:
-
-```
-mvn test
-```
-
-## Contributing
-
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
