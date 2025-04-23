@@ -22,7 +22,7 @@ To use this library in your project, add the following dependency to your `pom.x
 <dependency>
     <groupId>net.osslabz</groupId>
     <artifactId>turnstile-siteverify-client</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
