@@ -43,8 +43,8 @@
     </developers>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com/osslabz/turnstile-siteverify-client.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/osslabz/turnstile-siteverify-client.git</developerConnection>
+        <connection>scm:git:https://github.com/osslabz/turnstile-siteverify-client.git</connection>
+        <developerConnection>scm:git:https://github.com/osslabz/turnstile-siteverify-client.git</developerConnection>
         <url>https://github.com/osslabz/turnstile-siteverify-client</url>
         <tag>main</tag>
     </scm>
