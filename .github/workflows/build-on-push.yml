@@ -1,21 +1,28 @@
-name: maven-build
+name: build-on-push
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches-ignore:
+      - main
 
 jobs:
-  build:
+  build-on-push:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK
+      - name: checkout
+        uses: actions/checkout@v4
+
+
+      - name: setup-jdk
         uses: actions/setup-java@v4
         with:
           java-version: 21
           distribution: 'temurin'
           cache: maven
-      - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots package
+
+      - name: maven-build-verify
+        run: mvn --batch-mode --update-snapshots clean verify
