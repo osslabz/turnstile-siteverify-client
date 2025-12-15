@@ -1,7 +1,8 @@
 Turnstyle Siteverity Client
 ===========================
 ![GitHub](https://img.shields.io/github/license/osslabz/turnstile-siteverify-client)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/osslabz/turnstile-siteverify-client/build-on-push.yml?branch=main)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/osslabz/turnstile-siteverify-client/build-on-push.yml?branch=dev&label=build&logo=git)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/osslabz/turnstile-siteverify-client/build-release-on-main-push.yml?branch=main&label=perform-release&logo=semanticrelease)
 [![Maven Central](https://img.shields.io/maven-central/v/net.osslabz/turnstile-siteverify-client?label=Maven%20Central)](https://search.maven.org/artifact/net.osslabz/turnstile-siteverify-client)
 
 # Cloudflare Turnstile Client
