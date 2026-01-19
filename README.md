@@ -1,4 +1,4 @@
-Turnstyle Siteverity Client
+Turnstile Siteverify Client
 ===========================
 ![GitHub](https://img.shields.io/github/license/osslabz/turnstile-siteverify-client)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/osslabz/turnstile-siteverify-client/build-on-push.yml?branch=dev&label=build&logo=git)
