@@ -3,11 +3,14 @@ Turnstile Siteverify Client
 ![GitHub](https://img.shields.io/github/license/osslabz/turnstile-siteverify-client)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/osslabz/turnstile-siteverify-client/build-on-push.yml?branch=dev&label=build&logo=git)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/osslabz/turnstile-siteverify-client/build-release-on-main-push.yml?branch=main&label=perform-release&logo=semanticrelease)
+[![Reproducible Builds](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/jvm-repo-rebuild/reproducible-central/master/content/net/osslabz/turnstile-siteverify-client/badge.json)](https://github.com/jvm-repo-rebuild/reproducible-central/blob/master/content/net/osslabz/turnstile-siteverify-client/README.md)
 [![Maven Central](https://img.shields.io/maven-central/v/net.osslabz/turnstile-siteverify-client?label=Maven%20Central)](https://search.maven.org/artifact/net.osslabz/turnstile-siteverify-client)
 
 # Cloudflare Turnstile Client
 
 This is a Java client library for the Cloudflare Turnstile Siteverify API. It provides a simple and efficient way to verify Turnstile tokens in your Java applications.
+
+Version 0.4.1 is from 2025-10-29; only dependency bumps have landed since. It is four classes and ships no tests. One other project of mine depends on it.
 
 ## Features
 
