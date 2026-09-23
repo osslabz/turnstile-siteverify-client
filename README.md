@@ -30,6 +30,26 @@ To use this library in your project, add the following dependency to your `pom.x
 </dependency>
 ```
 
+## Snapshots
+
+Every push to `dev` publishes the next version as a `-SNAPSHOT` to Central's snapshot repository. Maven doesn't
+search that repository by default, so a build that wants a snapshot declares it:
+
+```xml
+<repositories>
+    <repository>
+        <id>central-snapshots</id>
+        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        <releases>
+            <enabled>false</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+```
+
 ## Usage
 
 Here's a simple example of how to use the Cloudflare Turnstile Client:
