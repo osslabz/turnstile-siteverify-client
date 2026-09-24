@@ -31,6 +31,11 @@ class NetworkUtilsTest {
     }
 
     @Test
+    void returnsEmptyFirstEntryOfForwardedForListWithoutAddresses() {
+        assertEquals("", clientIp(Map.of("X-Forwarded-For", ",")));
+    }
+
+    @Test
     void keepsCommaListInOtherHeadersAsItIs() {
         assertEquals("203.0.113.7, 10.0.0.1", clientIp(Map.of("X-Real-IP", "203.0.113.7, 10.0.0.1")));
     }

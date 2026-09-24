@@ -31,7 +31,7 @@ public class NetworkUtils {
             String ip = request.getHeader(header);
             if (ip != null && !ip.trim().isEmpty() && !"unknown".equalsIgnoreCase(ip)) {
                 if ("X-Forwarded-For".equalsIgnoreCase(header) && ip.contains(",")) {
-                    ip = ip.split(",")[0].trim();
+                    ip = ip.substring(0, ip.indexOf(',')).trim();
                 }
                 return ip;
             }
