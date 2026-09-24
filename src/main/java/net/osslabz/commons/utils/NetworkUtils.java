@@ -29,8 +29,8 @@ public class NetworkUtils {
 
         for (String header : IP_HEADERS) {
             String ip = request.getHeader(header);
-            if (ip != null && !ip.trim().isEmpty() && !ip.equalsIgnoreCase("unknown")) {
-                if (header.equalsIgnoreCase("X-Forwarded-For") && ip.contains(",")) {
+            if (ip != null && !ip.trim().isEmpty() && !"unknown".equalsIgnoreCase(ip)) {
+                if ("X-Forwarded-For".equalsIgnoreCase(header) && ip.contains(",")) {
                     ip = ip.split(",")[0].trim();
                 }
                 return ip;
