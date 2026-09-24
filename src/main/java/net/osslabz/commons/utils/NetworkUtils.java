@@ -1,16 +1,10 @@
 package net.osslabz.commons.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class NetworkUtils {
-
-    private static final Logger log = LoggerFactory.getLogger(NetworkUtils.class);
 
     // Common headers that might contain the real IP address
     private static final List<String> IP_HEADERS = Arrays.asList(
@@ -44,36 +38,5 @@ public class NetworkUtils {
         }
 
         return request.getRemoteAddr();
-    }
-
-    private static boolean isValidIpAddress(String ip) {
-
-        if (ip == null || ip.isEmpty()) {
-            return false;
-        }
-
-        // Remove IPv6 zone index if present
-        if (ip.contains("%")) {
-            ip = ip.split("%")[0];
-        }
-
-        try {
-            // Try to create an InetAddress - this validates both IPv4 and IPv6
-            InetAddress addr = InetAddress.getByName(ip);
-
-            // Additional checks for special/reserved addresses
-            if (addr.isAnyLocalAddress()
-                    || addr.isLoopbackAddress()
-                    || addr.isLinkLocalAddress()
-                    || addr.isSiteLocalAddress()) {
-                log.warn("IP address {} is a special/reserved address", ip);
-                return false;
-            }
-
-            return true;
-        } catch (UnknownHostException e) {
-            log.warn("Invalid IP address format: {}", ip);
-            return false;
-        }
     }
 }
