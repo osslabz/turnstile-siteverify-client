@@ -8,24 +8,22 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class NetworkUtils {
 
     private static final Logger log = LoggerFactory.getLogger(NetworkUtils.class);
 
     // Common headers that might contain the real IP address
     private static final List<String> IP_HEADERS = Arrays.asList(
-        "CF-Connecting-IP",     // Cloudflare
-        "X-Forwarded-For",      // Common proxy header
-        "X-Real-IP",            // Nginx
-        "True-Client-IP",       // Akamai and Cloudflare
-        "X-Cluster-Client-IP",  // Rackspace, Riverbed
-        "Fastly-Client-IP",     // Fastly
-        "X-Forwarded",          // Generic forward
-        "Forwarded-For",        // Generic forward
-        "X-Original-Forwarded-For" // Original forwarded
-    );
-
+            "CF-Connecting-IP", // Cloudflare
+            "X-Forwarded-For", // Common proxy header
+            "X-Real-IP", // Nginx
+            "True-Client-IP", // Akamai and Cloudflare
+            "X-Cluster-Client-IP", // Rackspace, Riverbed
+            "Fastly-Client-IP", // Fastly
+            "X-Forwarded", // Generic forward
+            "Forwarded-For", // Generic forward
+            "X-Original-Forwarded-For" // Original forwarded
+            );
 
     /**
      * Retrieves the client's IP address from the request, taking into account various proxy headers
@@ -48,7 +46,6 @@ public class NetworkUtils {
         return request.getRemoteAddr();
     }
 
-
     private static boolean isValidIpAddress(String ip) {
 
         if (ip == null || ip.isEmpty()) {
@@ -65,8 +62,10 @@ public class NetworkUtils {
             InetAddress addr = InetAddress.getByName(ip);
 
             // Additional checks for special/reserved addresses
-            if (addr.isAnyLocalAddress() || addr.isLoopbackAddress() ||
-                addr.isLinkLocalAddress() || addr.isSiteLocalAddress()) {
+            if (addr.isAnyLocalAddress()
+                    || addr.isLoopbackAddress()
+                    || addr.isLinkLocalAddress()
+                    || addr.isSiteLocalAddress()) {
                 log.warn("IP address {} is a special/reserved address", ip);
                 return false;
             }

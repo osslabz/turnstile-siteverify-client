@@ -1,11 +1,10 @@
 package net.osslabz.turnstile.siteverify;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class TurnstileSiteverifyResponse {
