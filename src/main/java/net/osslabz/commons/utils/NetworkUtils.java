@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
+// Public API: a private constructor would remove the public one callers may use.
+@SuppressWarnings("PMD.InstantiableUtilityClass")
 public class NetworkUtils {
 
     // Common headers that might contain the real IP address
