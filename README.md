@@ -10,7 +10,7 @@ Turnstile Siteverify Client
 
 This is a Java client library for the Cloudflare Turnstile Siteverify API. It provides a simple and efficient way to verify Turnstile tokens in your Java applications.
 
-Version 0.4.1 is from 2025-10-29; only dependency bumps have landed since. It is four classes and ships no tests. One other project of mine depends on it.
+Version 0.4.1 is from 2025-10-29; dependency bumps and an X-Forwarded-For fix have landed since. It is four classes, tested offline against a local HTTP server. One other project of mine depends on it.
 
 ## Features
 
