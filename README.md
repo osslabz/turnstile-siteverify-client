@@ -52,43 +52,46 @@ search that repository by default, so a build that wants a snapshot declares it:
 
 ## Usage
 
-Here's a simple example of how to use the Cloudflare Turnstile Client:
+`isValid` returns true only when Cloudflare accepts the token, reports no error codes, and the token was issued for
+the given action. It returns false instead of throwing when the call to siteverify fails.
+
+In a servlet application, pass the request. The client reads the token from the `cf-turnstile-response` form field
+and the visitor's IP from the usual proxy headers, falling back to the remote address:
 
 ```java
-import com.example.cloudflare.turnstile.TurnstileClient;
-import com.example.cloudflare.turnstile.TurnstileResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import net.osslabz.turnstile.siteverify.TurnstileSiteverifyClient;
 
-public class Example {
-    public static void main(String[] args) {
-        String secretKey = "your_secret_key_here";
-        TurnstileClient client = new TurnstileClient(secretKey);
+TurnstileSiteverifyClient turnstile = new TurnstileSiteverifyClient("your-secret-key");
 
-        try {
-            TurnstileResponse response = client.verify("turnstile_response_token");
-            if (response.isSuccess()) {
-                System.out.println("Verification successful!");
-            } else {
-                System.out.println("Verification failed: " + response.getErrorCodes());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
+boolean human = turnstile.isValid("login", httpServletRequest);
+```
+
+Without a servlet request, pass the token and the visitor's IP yourself. The IP is optional; pass `null` to leave
+it out:
+
+```java
+boolean human = turnstile.isValid("login", token, visitorIp);
 ```
 
 ## Configuration
 
-You can customize the `OkHttpClient` and `ObjectMapper` used by the `TurnstileClient` by using the appropriate constructor:
+The default `OkHttpClient` uses 30-second timeouts and logs requests at TRACE. To use your own, pass it first, and
+optionally an `ObjectMapper`, before the secret key:
 
 ```java
-OkHttpClient customHttpClient = new OkHttpClient.Builder()
-    .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-    .build();
-ObjectMapper customObjectMapper = new ObjectMapper();
+OkHttpClient httpClient = new OkHttpClient.Builder()
+        .callTimeout(Duration.ofSeconds(5))
+        .build();
+ObjectMapper objectMapper = new ObjectMapper()
+        .registerModule(new JavaTimeModule())
+        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
-TurnstileClient client = new TurnstileClient(secretKey, customHttpClient, customObjectMapper);
+TurnstileSiteverifyClient turnstile = new TurnstileSiteverifyClient(httpClient, objectMapper, "your-secret-key");
 ```
+
+A custom `ObjectMapper` needs the `JavaTimeModule` and must ignore unknown properties, because siteverify returns
+fields the response class doesn't map.
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
