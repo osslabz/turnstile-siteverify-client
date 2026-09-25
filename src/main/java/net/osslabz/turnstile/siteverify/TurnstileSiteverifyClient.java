@@ -92,11 +92,12 @@ public class TurnstileSiteverifyClient {
 
     private TurnstileSiteverifyResponse verify(String challengeResponseToken, String connectingIp) {
 
-        RequestBody formBody = new FormBody.Builder()
-                .add("secret", this.secretKey)
-                .add("response", challengeResponseToken)
-                .add("remoteip", connectingIp)
-                .build();
+        FormBody.Builder form =
+                new FormBody.Builder().add("secret", this.secretKey).add("response", challengeResponseToken);
+        if (connectingIp != null && !connectingIp.isBlank()) {
+            form.add("remoteip", connectingIp);
+        }
+        RequestBody formBody = form.build();
 
         Request request =
                 new Request.Builder().url(SITEVERIFY_URL).post(formBody).build();

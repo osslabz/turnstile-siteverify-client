@@ -26,6 +26,9 @@ import okhttp3.OkHttpClient;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.slf4j.LoggerFactory;
 
 class TurnstileSiteverifyClientTest {
@@ -122,6 +125,17 @@ class TurnstileSiteverifyClientTest {
         assertEquals(
                 "secret=test-secret&response=a%2Bb%2Fc%3Dd%26e+f&remoteip=203.0.113.7",
                 request.getBody().string(StandardCharsets.UTF_8));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = {"", "  "})
+    void omitsClientIpFromTheFormWhenItIsUnknown(String unknownIp) throws InterruptedException {
+        respond(200, SUCCESS_BODY);
+
+        assertTrue(client().isValid(ACTION, TOKEN, unknownIp));
+        assertEquals(
+                "secret=test-secret&response=token-123", takeRequest().getBody().string(StandardCharsets.UTF_8));
     }
 
     @Test
