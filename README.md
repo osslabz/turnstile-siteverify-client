@@ -76,8 +76,9 @@ boolean human = turnstile.isValid("login", token, visitorIp);
 
 ## Configuration
 
-The default `OkHttpClient` uses 30-second timeouts and logs requests at TRACE. To use your own, pass it first, and
-optionally an `ObjectMapper`, before the secret key:
+The default `OkHttpClient` uses 30-second timeouts and logs request and response headers at TRACE. It leaves the
+bodies out, because the request body carries the secret key. To use your own, pass it first, and optionally an
+`ObjectMapper`, before the secret key:
 
 ```java
 OkHttpClient httpClient = new OkHttpClient.Builder()

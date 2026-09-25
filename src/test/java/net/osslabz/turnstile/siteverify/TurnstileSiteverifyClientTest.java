@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
@@ -73,13 +74,18 @@ class TurnstileSiteverifyClientTest {
 
     @AfterEach
     void releaseClientLog() {
+        clientLogger.setLevel(null);
         clientLogger.setAdditive(true);
         clientLogger.detachAppender(clientLog);
     }
 
-    /** Sends every call to the local server and remembers the URL the client asked for. */
     private OkHttpClient.Builder httpClientRoutedToServer() {
-        return new OkHttpClient.Builder().addInterceptor(chain -> {
+        return routedToServer(new OkHttpClient.Builder());
+    }
+
+    /** Sends every call to the local server and remembers the URL the client asked for. */
+    private OkHttpClient.Builder routedToServer(OkHttpClient.Builder builder) {
+        return builder.addInterceptor(chain -> {
             HttpUrl requested = chain.request().url();
             requestedUrls.add(requested);
             HttpUrl local = server.url(requested.encodedPath());
@@ -204,6 +210,25 @@ class TurnstileSiteverifyClientTest {
         assertFalse(new TurnstileSiteverifyClient(httpClientRoutedToServer().build(), strictMapper, SECRET)
                 .isValid(ACTION, TOKEN, CLIENT_IP));
         assertLoggedFailure("com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException");
+    }
+
+    @Test
+    void defaultHttpClientTraceLogNeverContainsTheSecretKey() {
+        respond(200, SUCCESS_BODY);
+        clientLogger.setLevel(Level.TRACE);
+        OkHttpClient defaultClientRoutedToServer = routedToServer(
+                        TurnstileSiteverifyClient.defaultHttpClient().newBuilder())
+                .build();
+
+        assertTrue(
+                new TurnstileSiteverifyClient(defaultClientRoutedToServer, SECRET).isValid(ACTION, TOKEN, CLIENT_IP));
+
+        List<String> logged =
+                clientLog.list.stream().map(ILoggingEvent::getFormattedMessage).toList();
+        assertTrue(
+                logged.contains("--> POST https://challenges.cloudflare.com/turnstile/v0/siteverify"),
+                logged::toString);
+        assertTrue(logged.stream().noneMatch(message -> message.contains(SECRET)), logged::toString);
     }
 
     @Test

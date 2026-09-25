@@ -35,7 +35,8 @@ public class TurnstileSiteverifyClient {
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message ->
                 LoggerFactory.getLogger(TurnstileSiteverifyClient.class).trace(message));
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        // The request body carries the secret key.
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
 
         DEFAULT_OKHTTP_CLIENT = new OkHttpClient.Builder()
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -66,6 +67,11 @@ public class TurnstileSiteverifyClient {
         this.secretKey = secretKey;
         this.httpClient = httpClient;
         this.objectMapper = objectMapper;
+    }
+
+    static OkHttpClient defaultHttpClient() {
+
+        return DEFAULT_OKHTTP_CLIENT;
     }
 
     public boolean isValid(String action, HttpServletRequest httpServletRequest) {
