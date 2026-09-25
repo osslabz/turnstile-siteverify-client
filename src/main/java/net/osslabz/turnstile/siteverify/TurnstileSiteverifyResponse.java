@@ -18,5 +18,6 @@ public class TurnstileSiteverifyResponse {
 
     private String hostname;
 
+    @JsonProperty("error-codes")
     private List<String> errorCodes = new ArrayList<>(3);
 }

@@ -141,6 +141,15 @@ class TurnstileSiteverifyClientTest {
     }
 
     @Test
+    void rejectsTokenWhenSiteverifyReportsErrorCodesDespiteSuccess() {
+        respond(200, """
+                {"success":true,"hostname":"example.com","error-codes":["internal-error"],"action":"login"}""");
+
+        assertFalse(client().isValid(ACTION, TOKEN, CLIENT_IP));
+        assertTrue(clientLog.list.isEmpty());
+    }
+
+    @Test
     void rejectsTokenWhenSiteverifyAnswersWithHttpError() {
         respond(500, "internal error");
 
