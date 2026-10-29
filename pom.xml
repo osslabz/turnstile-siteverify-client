@@ -25,7 +25,7 @@
         <maven.compiler.release>${osslabz.java.version}</maven.compiler.release>
 
         <jackson.version>2.22.4</jackson.version>
-        <okhttp.version>5.5.0</okhttp.version>
+        <okhttp.version>5.5.1</okhttp.version>
         <lombok.version>1.18.48</lombok.version>
 
         <!-- Floors, not targets: measured coverage minus five points, capped at 0.90 line and
